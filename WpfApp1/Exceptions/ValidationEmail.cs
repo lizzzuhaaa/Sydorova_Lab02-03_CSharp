@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab01Sydorova
+namespace Lab01Sydorova.Exceptions
 {
-    internal class ValidationPastBirth : Exception
+    internal class ValidationEmail : Exception
     {
         private string _message;
 
-        public ValidationPastBirth(string message)
+        public ValidationEmail(string message)
         {
-            this._message = message;
+            _message = message;
         }
-        public ValidationPastBirth(string message, DateTime date) : this("Incorrect age: this person is older then 135 y.o.")
+        public ValidationEmail(string message, string email) : this("Your email is invalid format")
         {
         }
 

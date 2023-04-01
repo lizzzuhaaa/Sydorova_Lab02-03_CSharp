@@ -1,51 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Mail;
-using System.Text;
+﻿using Lab01Sydorova.Exceptions;
+using System;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Windows;
 
-namespace Lab01Sydorova
+
+namespace Lab01Sydorova.Model
 {
-    internal class Person
+    [Serializable]
+    public class Person
     {
         private string _firstname;
         private string _lastname;
         private string _email;
         private DateTime _birthdate;
-
-        public Person (string firstName, string lastName, string email, DateTime birthday) 
-        {
-            this.FirstName = firstName;
-            this.LastName = lastName;   
-            this.Email = email;
-            this.Birthday = birthday;
-            if (!ValidateEmail(email))
-            {
-                throw new ValidationEmail("", email);
-            }
-            if (!ValidateBirthDatePast(birthday))
-            {
-                throw new ValidationPastBirth("", birthday);
-            }
-            if(!ValidateBirthDateFuture(birthday))
-            {
-                throw new ValidationFutureBirth("", birthday);
-            }
-        }
-
-        public Person(string firstName, string lastName, string email) : this(firstName, lastName, email, DateTime.Today)
-        {
-            ValidateEmail(email);
-        }
-
-        public Person(string firstName, string lastName, DateTime birthday) : this(firstName, lastName, "", birthday)
-        {
-            ValidateBirthDatePast(birthday);
-            ValidateBirthDateFuture(birthday);
-        }
 
         public string FirstName
         {
@@ -96,14 +62,45 @@ namespace Lab01Sydorova
         {
             get
             {
-                if ((this.Birthday.Month == DateTime.Now.Month) && (this.Birthday.Day == DateTime.Now.Day)) { return true; }
+                if (Birthday.Month == DateTime.Now.Month && Birthday.Day == DateTime.Now.Day) { return true; }
                 return false;
             }
         }
 
+        public Person(string firstName, string lastName, string email, DateTime birthday)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            Birthday = birthday;
+            if (!ValidateEmail(email))
+            {
+                throw new ValidationEmail("", email);
+            }
+            if (!ValidateBirthDatePast(birthday))
+            {
+                throw new ValidationPastBirth("", birthday);
+            }
+            if (!ValidateBirthDateFuture(birthday))
+            {
+                throw new ValidationFutureBirth("", birthday);
+            }
+        }
+
+        public Person(string firstName, string lastName, string email) : this(firstName, lastName, email, DateTime.Today)
+        {
+            ValidateEmail(email);
+        }
+
+        public Person(string firstName, string lastName, DateTime birthday) : this(firstName, lastName, "", birthday)
+        {
+            ValidateBirthDatePast(birthday);
+            ValidateBirthDateFuture(birthday);
+        }
+
         private string ChineseSignCalculate()
         {
-            switch ((this.Birthday.Year - 4) % 12)
+            switch ((Birthday.Year - 4) % 12)
             {
                 case 0:
                     {
@@ -158,82 +155,83 @@ namespace Lab01Sydorova
         }
         private string SunSignCalculate()
         {
-            switch (this.Birthday.Month)
+            switch (Birthday.Month)
             {
                 case 1:
                     {
-                        if (this.Birthday.Day < 21) return "Capricorn";
+                        if (Birthday.Day < 21) return "Capricorn";
                         else return "Aquarius";
                     }
                 case 2:
                     {
-                        if (this.Birthday.Day < 20) return "Aquarius";
+                        if (Birthday.Day < 20) return "Aquarius";
                         else return "Pisces";
                     }
                 case 3:
                     {
-                        if (this.Birthday.Day < 21) return "Pisces";
+                        if (Birthday.Day < 21) return "Pisces";
                         else return "Aries";
                     }
                 case 4:
                     {
-                        if (this.Birthday.Day < 21) return "Aries";
+                        if (Birthday.Day < 21) return "Aries";
                         else return "Taurus";
                     }
                 case 5:
                     {
-                        if (this.Birthday.Day < 22) return "Taurus";
+                        if (Birthday.Day < 22) return "Taurus";
                         else return "Gemini";
                     }
                 case 6:
                     {
-                        if (this.Birthday.Day < 22) return "Gemini";
+                        if (Birthday.Day < 22) return "Gemini";
                         else return "Cancer";
                     }
                 case 7:
                     {
-                        if (this.Birthday.Day < 23) return "Cancer";
+                        if (Birthday.Day < 23) return "Cancer";
                         else return "Leo";
                     }
                 case 8:
                     {
-                        if (this.Birthday.Day < 22) return "Leo";
+                        if (Birthday.Day < 22) return "Leo";
                         else return "Virgo";
                     }
                 case 9:
                     {
-                        if (this.Birthday.Day < 24) return "Virgo";
+                        if (Birthday.Day < 24) return "Virgo";
                         else return "Libra";
                     }
                 case 10:
                     {
-                        if (this.Birthday.Day < 24) return "Libra";
+                        if (Birthday.Day < 24) return "Libra";
                         else return "Scorpio";
                     }
                 case 11:
                     {
-                        if (this.Birthday.Day < 24) return "Scorpio";
+                        if (Birthday.Day < 24) return "Scorpio";
                         else return "Saggitarius";
                     }
                 case 12:
                     {
-                        if (this.Birthday.Day < 23) return "Saggitarius";
+                        if (Birthday.Day < 23) return "Saggitarius";
                         else return "Capricorn";
                     }
                 default: return "";
             }
 
         }
+
         private bool AgeAdultCalculate()
         {
             DateTime currentDate = DateTime.Now;
-            int ageThisYear = currentDate.Year - this.Birthday.Year;
-            if (this.Birthday > currentDate.AddYears(-ageThisYear))
+            int ageThisYear = currentDate.Year - Birthday.Year;
+            if (Birthday > currentDate.AddYears(-ageThisYear))
                 ageThisYear--;
             return ageThisYear >= 18;
         }
 
-        private bool ValidateEmail(string email) 
+        private bool ValidateEmail(string email)
         {
             string regex = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$";
 

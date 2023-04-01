@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab01Sydorova
+namespace Lab01Sydorova.Exceptions
 {
-    internal class ValidationFutureBirth : Exception
+    internal class ValidationPastBirth : Exception
     {
         private string _message;
 
-        public ValidationFutureBirth(string message)
+        public ValidationPastBirth(string message)
         {
-            this._message = message;
+            _message = message;
         }
-        public ValidationFutureBirth(string message, DateTime date) : this("Incorrect age: this person doesn`t exist")
+        public ValidationPastBirth(string message, DateTime date) : this("Incorrect age: this person is older then 135 y.o.")
         {
         }
 

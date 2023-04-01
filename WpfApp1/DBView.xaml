@@ -1,0 +1,42 @@
+﻿<Window x:Class="Lab01Sydorova.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Lab01Sydorova"
+        mc:Ignorable="d"
+        Title="Database" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Menu Grid.Row="0" Background="MistyRose">
+            <MenuItem Header="File">
+                <MenuItem Header="Save" Command="{Binding Save}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Add">
+                <MenuItem Header="Add A Person" Command="{Binding Add}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header ="Edit">
+                <MenuItem Header ="Edit This Person" Command="{Binding Edit}"></MenuItem>
+            </MenuItem>
+            <MenuItem Header ="Delete">
+                <MenuItem Header ="Delete This Person" Command="{Binding Delete}"></MenuItem>
+            </MenuItem>
+        </Menu>
+
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False"  ScrollViewer.CanContentScroll="True"  ItemsSource="{Binding All, Mode=OneWay,UpdateSourceTrigger=PropertyChanged}" SelectedValue="{Binding ExactPerson,UpdateSourceTrigger=PropertyChanged}" >
+            <DataGrid.Columns >
+                <DataGridTextColumn Header="Name" Binding="{Binding FirstName, Mode=OneWay}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Surname" Binding="{Binding LastName, Mode=OneWay}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Birthday" Binding="{Binding Birthday, Mode=OneWay, StringFormat=dd/MM/yyyy}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email, Mode=OneWay}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Western Zodiac" Binding="{Binding SunSign, Mode=OneWay}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Chinese Zodiac" Binding="{Binding ChineseSign, Mode=OneWay}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Adulty" Binding="{Binding IsAdult, Mode=OneWay}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

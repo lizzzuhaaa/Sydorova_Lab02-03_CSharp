@@ -1,11 +1,11 @@
-﻿<Window ResizeMode="NoResize" x:Class="Lab01Sydorova.MainWindow"
+﻿<Window ResizeMode="NoResize" x:Class="Lab01Sydorova.AddPerson"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Lab01Sydorova"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Person" Height="450" Width="800">
     <Grid Background="Lavender">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -23,7 +23,7 @@
         <TextBlock Name ="ChinaZodi" Grid.Row="0" Text="{Binding ChineseSign, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="Century Gothic" FontSize="12" HorizontalAlignment="Left" Height="NaN" Margin="608,211,0,165" Width="162"></TextBlock>
         <Rectangle Name="WesternZodiRect" Fill="MistyRose" Height="NaN" Stroke="Orchid" Margin="427,209,211,166" Width="NaN"/>
         <TextBlock Name="WesternZodi" Grid.Row="0" Text="{Binding SunSign, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="Century Gothic" FontSize="12" HorizontalAlignment="Left" Height="NaN" Margin="427,209,0,166" Width="162"/>
-        <Button Name="Proceed" Content="Proceed" Height="NaN" Margin="352,165,352,282" Width="NaN" Command="{Binding Submitting}"></Button>
+        <Button Name="Proceed" Content="Proceed" Height="NaN" Margin="352,165,352,282" Width="NaN" Command="{Binding Submitting}" ></Button>
         <TextBlock Name="EnterFirst" Grid.Row="0" Text="Enter first name : " FontFamily="Century Gothic" FontSize="12" HorizontalAlignment="Left" Height="NaN" Margin="10,0,0,452" Width="162"/>
         <TextBlock Name="EnterLast" Grid.Row="0" Text="Enter last name : "  FontFamily="Century Gothic" FontSize="12" HorizontalAlignment="Left" Height="NaN" Margin="10,46,0,406" Width="162"/>
         <TextBlock Name="EnterEmail" Grid.Row="0" Text="Enter email : " FontFamily="Century Gothic" FontSize="12" HorizontalAlignment="Left" Height="NaN" Margin="10,93,0,360" Width="162"/>
@@ -31,5 +31,6 @@
         <TextBox Name="FirstName" FontFamily="Century Gothic" FontSize="12" Text="{Binding FirstName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Height="23" Margin="0,21,0,0" VerticalAlignment="Top" Width="780"/>
         <TextBox Name="LastName" FontFamily="Century Gothic" FontSize="12" Text="{Binding LastName, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Height="23" Margin="0,65,0,0" VerticalAlignment="Top" Width="780"/>
         <TextBox Name="Email" FontFamily="Century Gothic" FontSize="12" Text="{Binding Email, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" Height="23" Margin="0,113,0,0" VerticalAlignment="Top" Width="780"/>
+        <Button x:Name="Back" Content="Back" Height="NaN" Margin="476,165,228,282" Width="NaN" Command="{Binding Back}"/>
     </Grid>
 </Window>

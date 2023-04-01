@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Lab01Sydorova.DataManage;
+using Lab01Sydorova.VM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +25,8 @@ namespace Lab01Sydorova
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainWindowVM();
+            DataStorage.Initialize(new CreateDataStorage());
+            DataContext = new TableModify();
         }
     }
 }
